@@ -3,21 +3,37 @@ package laboration3;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import se.iths.shapes.Shape;
 import se.iths.shapes.Shapes;
 
+import java.awt.*;
+
 public class Controller {
 
     Model model;
 
-    public Canvas canvas;
     @FXML
+    public Canvas canvas;
 
+    @FXML
     private ColorPicker colorPicker;
 
+    @FXML
+    private Slider sizeSlider;
+
+    @FXML
+    private CheckBox selectBox;
+
+    @FXML
+    private ChoiceBox<se.iths.shapes.shapes.Shapes> choiceBox;
+
+
+
     public Controller() {
+
     }
 
     public Controller (Model model) {
@@ -27,54 +43,35 @@ public class Controller {
     public void initialize() {
         model = new Model();
 
+        choiceBox.getItems().setAll(se.iths.shapes.shapes.Shapes.values());
+        choiceBox.valueProperty().bindBidirectional(model.shapeOptionProperty());
+        selectBox.selectedProperty().bindBidirectional(model.selectModeProperty());
+        sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
         colorPicker.valueProperty().bindBidirectional(model.colorProperty());
-        canvas.widthProperty().addListener(observable -> draw());
-        canvas.heightProperty().addListener(observable -> draw());
-    }
 
-    @FXML
-    protected void onCircleButtonClicked() {
-        model.setColor(Color.BLACK);
-        model.setText("Circle button clicked");
-    }
-
-    @FXML
-    protected void onSquareButtonClicked() {
-        model.setColor(Color.BLACK);
-        model.setText("Square button clicked");
-    }
-
-    @FXML
-    protected void onTriangleButtonClicked() {
-        model.setColor(Color.BLACK);
-        model.setText("Triangle button clicked");
     }
 
     private void draw() {
-        var gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        var graphicsContext = canvas.getGraphicsContext2D();
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (var shape : model.shapes) {
-            shape.draw(gc);
+            shape.draw(graphicsContext);
         }
-    }
-
-    public void mouseClicked(MouseEvent mouseEvent) {
-        model.setText("");
-        System.out.println(mouseEvent.getX() + ":" + mouseEvent.getY());
-        System.out.println(mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
-        System.out.println(mouseEvent.getScreenX() + ":" + mouseEvent.getScreenY());
     }
 
     public void canvasClicked(MouseEvent event) {
-        if( event.getButton().name().equals("PRIMARY"))
-            model.shapes.add(Shapes.circleOf(event.getX(), event.getY(), 10.0, model.getColor()));
-            //model.shapes.add(Shapes.rectangleOf(event.getX(), event.getY(), 10.0, model.getColor()));
-        else if( event.getButton().name().equals("SECONDARY"))
-        {
+
+        if(!selectBox.isSelected())
+        model.addShape(event.getX(),event.getY(),model.getShapeOption());
+        else
             model.shapes.stream()
                     .filter(shape -> shape.isInside(event.getX(), event.getY()))
-                    .findFirst().ifPresent(shape -> shape.setColor(Color.RED));
-        }
+                    .findFirst().ifPresent(shape -> model.changeColor(shape, model.getColor()));
+
         draw();
+    }
+
+    public void undo(){
+        model.undo();
     }
 }

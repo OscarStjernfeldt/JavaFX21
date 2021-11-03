@@ -4,4 +4,6 @@ module se.iths.shapes {
     requires java.desktop;
     requires javafx.graphics;
     requires javafx.base;
+
+    exports se.iths.shapes.shapes;
 }

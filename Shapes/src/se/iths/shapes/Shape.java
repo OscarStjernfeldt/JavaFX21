@@ -6,11 +6,13 @@ import se.iths.shapes.shapes.Circle;
 import se.iths.shapes.shapes.Square;
 
 public abstract sealed class Shape permits Circle, Square{
+    private double size;
     private Color color;
     private double x;
     private double y;
 
-    public Shape(Color color, double x, double y) {
+    public Shape(Color color, double x, double y, double size) {
+        this.size = size;
         this.color = color;
         this.x = x;
         this.y = y;
@@ -19,6 +21,8 @@ public abstract sealed class Shape permits Circle, Square{
     public abstract void draw (GraphicsContext graphicsContext);
 
     public abstract boolean isInside(double x, double y);
+
+    public abstract String toSvg();
 
     public Color getColor() {
         return color;
@@ -45,5 +49,13 @@ public abstract sealed class Shape permits Circle, Square{
     public Shape setY(double y) {
         this.y = y;
         return this;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
     }
 }

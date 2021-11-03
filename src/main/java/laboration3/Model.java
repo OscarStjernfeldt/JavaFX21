@@ -4,32 +4,63 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import se.iths.shapes.Shape;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.input.MouseEvent;
-import se.iths.shapes.Shapes;
+import se.iths.shapes.shapes.Shapes;
 
 public class Model {
 
+    private Command command = ()->{};
     private final StringProperty text;
     private final IntegerProperty size;
-    private final BooleanProperty inColor;
     private final ObjectProperty<Color> color;
+    private final BooleanProperty selectMode;
+    private final ObjectProperty<Shapes> shapeOption;
 
-    ObservableList<String> observableList =
+    ObservableList<Shape> shapes =
             FXCollections.observableArrayList();
 
-    List<Shape> shapes = new ArrayList<>();
-
-    double[] xcoords = new double[3];
-    double[] ycoords = new double[3];
-    int clickCounter = 0;
-
     public Model() {
+
         this.text = new SimpleStringProperty("");
-        this.inColor = new SimpleBooleanProperty();
         this.color = new SimpleObjectProperty<>(Color.BLACK);
         this.size = new SimpleIntegerProperty(5);
+        selectMode = new SimpleBooleanProperty(false);
+        shapeOption = new SimpleObjectProperty<>(Shapes.CIRCLE);
+    }
+
+    public boolean isSelectMode() {
+        return selectMode.get();
+    }
+
+    public BooleanProperty selectModeProperty() {
+        return selectMode;
+    }
+
+    public void setSelectMode(boolean selectMode) {
+        this.selectMode.set(selectMode);
+    }
+
+    public String getText() {
+        return text.get();
+    }
+
+    public StringProperty textProperty() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text.set(text);
+    }
+
+    public int getSize() {
+        return size.get();
+    }
+
+    public IntegerProperty sizeProperty() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size.set(size);
     }
 
     public Color getColor() {
@@ -44,37 +75,52 @@ public class Model {
         this.color.set(color);
     }
 
-    public boolean isInColor() {
-        return inColor.get();
+    public Shapes getShapeOption() {
+        return shapeOption.get();
     }
 
-    public BooleanProperty inColorProperty() {
-        return inColor;
+    public ObjectProperty<Shapes> shapeOptionProperty() {
+        return shapeOption;
     }
 
-    public void setInColor(boolean inColor) {
-        this.inColor.set(inColor);
+    public void setShapeOption(Shapes shapeOption) {
+        this.shapeOption.set(shapeOption);
     }
 
-    public String getText() {
-        return text.getValue();
+    public void addShape(double x, double y, Shapes shape) {
+        switch (shape) {
+            case CIRCLE -> addCircle(x, y);
+            case SQUARE -> addSquare(x, y);
+        }
+
     }
 
-    public void setText(String text) {
-        this.text.setValue(text);
+    private void addCircle(double x, double y) {
+        add(se.iths.shapes.Shapes.circleOf(x, y, getSize() , getColor()));
     }
 
-    public StringProperty textProperty() {
-        return text;
+    private void addSquare(double x, double y) {
+        add(se.iths.shapes.Shapes.squareOf(x, y, getSize() , getColor()));
     }
 
-    private void addCircle(MouseEvent event) {
-        shapes.add(Shapes.circleOf(event.getX(), event.getY(),
-                ObjectProperty.getValue(), size.getValue()));
+    public void add(Shape shape){
+        shapes.add(shape);
+        command = () -> shapes.remove(shape);
+
     }
 
-    private void addSquare(MouseEvent event) {
-        shapes.add(Shapes.squareOf(event.getX(), event.getY(),
-                ObjectProperty.getValue(), size.getValue()));
+    public void changeColor(Shape shape, Color color){
+        Color previousColor = shape.getColor();
+        shape.setColor(color);
+        command = () -> shape.setColor(previousColor);
+    }
+
+    public void changeSize(Shape shape, double size){
+        double previousSize = shape.getSize();
+        command = () -> shape.setSize(previousSize);
+    }
+
+    public void undo(){
+        command.execute();
     }
 }
