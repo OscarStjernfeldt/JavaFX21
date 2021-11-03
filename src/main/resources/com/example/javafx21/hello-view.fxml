@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="590.0" styleClass="root" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx21.HelloController">
+    <Button onAction="#onHelloButtonClick" text="Connected to server" textAlignment="CENTER" />
+    <CheckBox fx:id="checkBox1" mnemonicParsing="false" onAction="#onCheckBoxChecked" text="CheckBox" VBox.vgrow="ALWAYS" />
+    <Label fx:id="welcomeText" text="Default-Color" />
+    <TextField fx:id="textField1" onKeyTyped="#keyTyped" />
+    <ColorPicker fx:id="colorPicker" />
+    <ListView fx:id="listView1" editable="true" nodeOrientation="RIGHT_TO_LEFT" prefHeight="345.0" prefWidth="400.0" />
+    <StackPane prefHeight="366.0" prefWidth="400">
+        <Canvas fx:id="canvas" nodeOrientation="INHERIT" onMouseClicked="#canvasClicked" />
+      <Pane accessibleText="ColoringPane" prefHeight="366.0" prefWidth="460.0" StackPane.alignment="CENTER" />
+    </StackPane>
+    <stylesheets>
+        <URL value="@css/stylesheet.css" />
+    </stylesheets>
+</VBox>

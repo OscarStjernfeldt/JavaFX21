@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="laboration3.Controller">
+    <children>
+       <Label alignment="CENTER" layoutX="450.0" layoutY="30.0" maxWidth="300.0" prefHeight="60.0" prefWidth="300.0" styleClass="title" text="Laboration 3" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font></Label>
+      <Pane layoutX="20.0" layoutY="120.0" prefHeight="600.0" prefWidth="1160.0">
+         <children>
+            <Canvas fx:id="canvas" height="640.0" layoutX="40.0" layoutY="40.0" onMouseClicked="#canvasClicked" width="1140.0" />
+         </children>
+      </Pane>
+        <Button layoutX="1000.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" text="Undo &lt;-" textAlignment="CENTER" />
+    <Button layoutX="50.0" layoutY="10.0" maxHeight="40.0" maxWidth="90.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onCircleButtonClicked" onMouseClicked="#canvasClicked" prefHeight="40.0" prefWidth="90.0" text="Circle" textAlignment="CENTER" />
+      <Button layoutX="175.0" layoutY="10.0" maxHeight="40.0" maxWidth="90.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onTriangleButtonClicked" onMouseClicked="#onTriangleButtonClicked" prefHeight="40.0" prefWidth="90.0" text="Triangle" />
+    <Button layoutX="300.0" layoutY="10.0" maxHeight="40.0" maxWidth="90.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onSquareButtonClicked" onMouseClicked="#onSquareButtonClicked" prefHeight="40.0" prefWidth="90.0" text="Square" textAlignment="CENTER" />
+      <ColorPicker fx:id="colorPicker" layoutX="275.0" layoutY="65.0" maxHeight="40.0" maxWidth="105.0" minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="105.0" />
+      <Slider layoutX="65.0" layoutY="75.0" maxHeight="18.0" maxWidth="188.0" minHeight="0.0" minWidth="0.0" prefHeight="18.0" prefWidth="188.0" />
+      <Button layoutX="800.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" text="Save" />
+   </children>
+</AnchorPane>

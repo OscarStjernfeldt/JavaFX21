@@ -1,0 +1,32 @@
+AnchorPane{
+    -fx-background-color: grey;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+}
+
+Button {
+    -fx-background-color: purple;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-font-size: 15px;
+}
+
+Pane{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+}
+
+
+Canvas{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 8px;
+    -fx-padding: 3px;
+}
+Label{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}

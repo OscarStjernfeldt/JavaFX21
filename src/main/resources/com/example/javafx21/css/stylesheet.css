@@ -1,0 +1,22 @@
+/* This changes style settings for all Button elements*/
+Button {
+    -fx-background-color: lightgreen;
+    -fx-padding: 15px;
+    -fx-border-color: black;
+    -fx-border-width: 2.5px;
+}
+/*Class style, use with styleClass in fxml file*/
+.welcome-text {
+    -fx-padding: 10px;
+    -fx-font-size: 20px;
+    -fx-background-color: teal;
+}
+/*Id style, only for one element.*/
+#specialButton {
+    -fx-background-color: blue;
+}
+
+.root {
+    -fx-padding: 10px;
+//-fx-base: rgba(60, 63, 65, 255); // dark
+}
