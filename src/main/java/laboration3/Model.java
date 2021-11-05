@@ -22,7 +22,7 @@ public class Model {
 
         this.text = new SimpleStringProperty("");
         this.color = new SimpleObjectProperty<>(Color.BLACK);
-        this.size = new SimpleIntegerProperty(5);
+        this.size = new SimpleIntegerProperty(25);
         selectMode = new SimpleBooleanProperty(false);
         shapeOption = new SimpleObjectProperty<>(Shapes.CIRCLE);
     }
