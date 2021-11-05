@@ -1,19 +1,24 @@
 package laboration3;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import se.iths.shapes.Shape;
-import se.iths.shapes.Shapes;
 
-import java.awt.*;
+import java.util.Optional;
+
 
 public class Controller {
 
-    Model model;
+    private Stage stage;
+    private Model model;
+    //private final Save save = new Save(this);
+    private ObjectProperty<Optional<Shape>> selectedShape = new SimpleObjectProperty<>(Optional.empty());
 
     @FXML
     public Canvas canvas;
@@ -29,8 +34,6 @@ public class Controller {
 
     @FXML
     private ChoiceBox<se.iths.shapes.shapes.Shapes> choiceBox;
-
-
 
     public Controller() {
 
@@ -48,7 +51,6 @@ public class Controller {
         selectBox.selectedProperty().bindBidirectional(model.selectModeProperty());
         sizeSlider.valueProperty().bindBidirectional(model.sizeProperty());
         colorPicker.valueProperty().bindBidirectional(model.colorProperty());
-
     }
 
     private void draw() {
@@ -60,7 +62,6 @@ public class Controller {
     }
 
     public void canvasClicked(MouseEvent event) {
-
         if(!selectBox.isSelected())
         model.addShape(event.getX(),event.getY(),model.getShapeOption());
         else
@@ -73,5 +74,30 @@ public class Controller {
 
     public void undo(){
         model.undo();
+        draw();
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void save(){
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save file");
+        fileChooser.showSaveDialog(stage);
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Svg file", "*.svg"));
+    }
+
+    public void exit(){
+        stage.close();
     }
 }

@@ -16,13 +16,15 @@ public final class Square extends Shape {
         graphicsContext.setFill(getColor());
         graphicsContext.fillRect(getX() - getSize() / 2, getY() - getSize() / 2, getSize(), getSize());
     }
-
+    @Override
     public boolean isInside(double x, double y) {
-        return false;
+        return x >= this.x - size / 2 &&
+                x <= this.x + size / 2 &&
+                y >= this.y - size / 2 &&
+                y <= this.y + size / 2;
     }
-
     @Override
     public String toSvg() {
-        return "";
+        return "<rect x=\"" + (getX() - size / 2) + "\" y=\"" + (getY() - size / 2) + "\" width=\"" + size + "\" height=\"" + size + "\" fill=\"#" + getColor().toString().substring(2) + "\" />";
     }
 }

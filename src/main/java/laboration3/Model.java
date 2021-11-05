@@ -8,7 +8,7 @@ import se.iths.shapes.shapes.Shapes;
 
 public class Model {
 
-    private Command command = ()->{};
+    private Command command = ()-> {};
     private final StringProperty text;
     private final IntegerProperty size;
     private final ObjectProperty<Color> color;

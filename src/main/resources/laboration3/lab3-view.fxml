@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="laboration3.Controller">
     <children>
-       <Label alignment="CENTER" layoutX="450.0" layoutY="30.0" maxWidth="300.0" prefHeight="60.0" prefWidth="300.0" styleClass="title" text="Laboration 3" textAlignment="CENTER">
+       <Label alignment="CENTER" layoutX="440.0" layoutY="8.0" maxWidth="300.0" prefHeight="60.0" prefWidth="300.0" styleClass="title" text="Laboration 3" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="30.0" />
          </font></Label>
@@ -16,11 +16,22 @@
             <Canvas fx:id="canvas" height="600.0" onMouseClicked="#canvasClicked" width="1160.0" />
          </children>
       </Pane>
-        <Button fx:id="undo" layoutX="1000.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" text="Undo &lt;-" textAlignment="CENTER" />
-      <ColorPicker fx:id="colorPicker" layoutX="300.0" layoutY="10.0" maxHeight="40.0" maxWidth="105.0" minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="105.0" />
-      <Slider fx:id="sizeSlider" layoutX="65.0" layoutY="75.0" maxHeight="18.0" maxWidth="188.0" minHeight="0.0" minWidth="0.0" prefHeight="18.0" prefWidth="188.0" />
-      <Button fx:id="save" layoutX="800.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" text="Save" />
-      <CheckBox fx:id="selectBox" layoutX="278.0" layoutY="66.0" mnemonicParsing="false" text="select mode" />
-      <ChoiceBox fx:id="choiceBox" layoutX="62.0" layoutY="17.0" prefWidth="150.0" />
+      <ToolBar layoutX="92.5" layoutY="70.0" prefHeight="40.0" prefWidth="975.0">
+         <items>
+            <Slider fx:id="sizeSlider" maxHeight="18.0" maxWidth="188.0" minHeight="0.0" minWidth="0.0" prefHeight="18.0" prefWidth="188.0" />
+            <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
+            <ColorPicker fx:id="colorPicker" maxHeight="30.0" maxWidth="140.0" minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="140.0" />
+            <CheckBox fx:id="selectBox" mnemonicParsing="false" text="select mode" />
+              <Button fx:id="undo" maxHeight="30.0" maxWidth="120.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#undo" prefHeight="30.0" prefWidth="120.0" text="Undo" textAlignment="CENTER">
+               <font>
+                  <Font size="10.0" />
+               </font></Button>
+            <Button fx:id="save" maxHeight="30.0" maxWidth="120.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="120.0" text="Save">
+               <font>
+                  <Font size="10.0" />
+               </font></Button>
+            <Button fx:id="exit" maxHeight="30.0" maxWidth="120.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="120.0" text="Exit" />
+         </items>
+      </ToolBar>
    </children>
 </AnchorPane>

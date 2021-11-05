@@ -3,8 +3,6 @@ package laboration3;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,9 @@ public class  MainApplication extends Application {
         scene.getStylesheets().add(getClass().getResource("css/stylesheet.css").toExternalForm());
         stage.setTitle("~~ LABORATION 3 ~~");
         stage.setScene(scene);
+        Controller controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        stage.setOnCloseRequest(windowEvent -> windowEvent.consume());
         stage.show();
 
     }

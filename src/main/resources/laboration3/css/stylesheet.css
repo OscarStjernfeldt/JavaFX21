@@ -5,8 +5,7 @@ AnchorPane{
 }
 
 Button {
-    -fx-background-color: purple;
-    -fx-text-fill: white;
+    -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 2px;
     -fx-font-size: 15px;
@@ -18,15 +17,13 @@ Pane{
     -fx-border-width: 3px;
 }
 
-
-Canvas{
-    -fx-background-color: white;
-    -fx-border-color: black;
-    -fx-border-width: 8px;
-    -fx-padding: 3px;
-}
 Label{
     -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+ToolBar {
     -fx-border-color: black;
     -fx-border-width: 2px;
 }

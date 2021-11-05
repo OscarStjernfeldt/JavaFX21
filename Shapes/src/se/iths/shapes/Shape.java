@@ -6,10 +6,10 @@ import se.iths.shapes.shapes.Circle;
 import se.iths.shapes.shapes.Square;
 
 public abstract sealed class Shape permits Circle, Square{
-    private double size;
-    private Color color;
-    private double x;
-    private double y;
+    public double size;
+    public Color color;
+    public double x;
+    public double y;
 
     public Shape(Color color, double x, double y, double size) {
         this.size = size;

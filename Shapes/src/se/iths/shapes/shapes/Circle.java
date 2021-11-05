@@ -26,6 +26,6 @@ public final class Circle extends Shape {
 
     @Override
     public String toSvg() {
-        return "";
+        return "<circle cx=\"" + getX() + "\" cy=\"" + getY() + "\" r=\"" + size / 2 + "\" fill=\"#" + getColor().toString().substring(2) + "\" />";
     }
 }
