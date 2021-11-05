@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 import se.iths.shapes.shapes.Circle;
 import se.iths.shapes.shapes.Square;
 
+import java.util.Objects;
+
 public abstract sealed class Shape permits Circle, Square{
     public double size;
     public Color color;
@@ -57,5 +59,18 @@ public abstract sealed class Shape permits Circle, Square{
 
     public void setSize(double size) {
         this.size = size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shape shape = (Shape) o;
+        return Double.compare(shape.size, size) == 0 && Double.compare(shape.x, x) == 0 && Double.compare(shape.y, y) == 0 && Objects.equals(color, shape.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size, color, x, y);
     }
 }

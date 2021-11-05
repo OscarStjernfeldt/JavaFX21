@@ -1,4 +1,5 @@
 package laboration3;
+
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,17 +7,21 @@ import javafx.scene.paint.Color;
 import se.iths.shapes.Shape;
 import se.iths.shapes.shapes.Shapes;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class Model {
 
-    private Command command = ()-> {};
+    private Command command = () -> {};
     private final StringProperty text;
     private final IntegerProperty size;
     private final ObjectProperty<Color> color;
     private final BooleanProperty selectMode;
     private final ObjectProperty<Shapes> shapeOption;
+    private final ObjectProperty<Shape> selectedShape;
+    static Deque<Command> deque = new ArrayDeque<>();
 
-    ObservableList<Shape> shapes =
-            FXCollections.observableArrayList();
+    ObservableList<Shape> shapes = FXCollections.observableArrayList();
 
     public Model() {
 
@@ -25,6 +30,7 @@ public class Model {
         this.size = new SimpleIntegerProperty(25);
         selectMode = new SimpleBooleanProperty(false);
         shapeOption = new SimpleObjectProperty<>(Shapes.CIRCLE);
+        selectedShape = null;
     }
 
     public boolean isSelectMode() {
@@ -94,33 +100,36 @@ public class Model {
         }
 
     }
-
     private void addCircle(double x, double y) {
-        add(se.iths.shapes.Shapes.circleOf(x, y, getSize() , getColor()));
+        add(se.iths.shapes.Shapes.circleOf(x, y, getSize(), getColor()));
     }
 
     private void addSquare(double x, double y) {
-        add(se.iths.shapes.Shapes.squareOf(x, y, getSize() , getColor()));
+        add(se.iths.shapes.Shapes.squareOf(x, y, getSize(), getColor()));
     }
 
-    public void add(Shape shape){
+    public void add(Shape shape) {
         shapes.add(shape);
-        command = () -> shapes.remove(shape);
+        deque.addLast(() -> shapes.remove(shape));
 
     }
 
-    public void changeColor(Shape shape, Color color){
+    public void changeColor(Shape shape, Color color) {
         Color previousColor = shape.getColor();
         shape.setColor(color);
-        command = () -> shape.setColor(previousColor);
+        deque.addLast(() -> shape.setColor(previousColor));
     }
 
-    public void changeSize(Shape shape, double size){
+    public void changeSize(Shape shape, double size) {
         double previousSize = shape.getSize();
-        command = () -> shape.setSize(previousSize);
+        deque.addLast(() -> shape.setSize(previousSize));
     }
 
-    public void undo(){
+    public void undo() {
+        if( deque.isEmpty() )
+            return;
+        Command command = deque.removeLast();
         command.execute();
     }
+
 }

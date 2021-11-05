@@ -11,6 +11,12 @@ Button {
     -fx-font-size: 15px;
 }
 
+TextFlow {
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-background-color: yellow;
+}
+
 Pane{
     -fx-background-color: white;
     -fx-border-color: black;

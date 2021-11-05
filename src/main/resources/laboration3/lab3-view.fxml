@@ -16,7 +16,7 @@
             <Canvas fx:id="canvas" height="600.0" onMouseClicked="#canvasClicked" width="1160.0" />
          </children>
       </Pane>
-      <ToolBar layoutX="92.5" layoutY="70.0" prefHeight="40.0" prefWidth="975.0">
+      <ToolBar layoutX="92.5" layoutY="72.0" prefHeight="40.0" prefWidth="975.0">
          <items>
             <Slider fx:id="sizeSlider" maxHeight="18.0" maxWidth="188.0" minHeight="0.0" minWidth="0.0" prefHeight="18.0" prefWidth="188.0" />
             <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
@@ -33,5 +33,10 @@
             <Button fx:id="exit" maxHeight="30.0" maxWidth="120.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#exit" prefHeight="30.0" prefWidth="120.0" text="Exit" />
          </items>
       </ToolBar>
+      <TextFlow id="text" layoutX="1050.0" layoutY="10.0" prefHeight="50.0" prefWidth="120.0" textAlignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Disabled exit on X. Please use &quot;Exit&quot; function." />
+         </children>
+      </TextFlow>
    </children>
 </AnchorPane>

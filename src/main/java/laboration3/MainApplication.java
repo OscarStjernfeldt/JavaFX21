@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class  MainApplication extends Application {
@@ -22,7 +21,6 @@ public class  MainApplication extends Application {
         stage.setResizable(false);
         stage.setOnCloseRequest(windowEvent -> windowEvent.consume());
         stage.show();
-
     }
 
     public static void main(String[] args) {

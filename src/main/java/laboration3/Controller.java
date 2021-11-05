@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import se.iths.shapes.Shape;
 
+import java.io.File;
 import java.util.Optional;
 
 
@@ -17,7 +18,6 @@ public class Controller {
 
     private Stage stage;
     private Model model;
-    //private final Save save = new Save(this);
     private ObjectProperty<Optional<Shape>> selectedShape = new SimpleObjectProperty<>(Optional.empty());
 
     @FXML
@@ -93,8 +93,8 @@ public class Controller {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save file");
-        fileChooser.showSaveDialog(stage);
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Svg file", "*.svg"));
+        File file = fileChooser.showSaveDialog(stage);
     }
 
     public void exit(){
