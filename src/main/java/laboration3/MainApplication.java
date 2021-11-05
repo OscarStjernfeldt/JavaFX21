@@ -19,6 +19,7 @@ public class  MainApplication extends Application {
         stage.setScene(scene);
         Controller controller = fxmlLoader.getController();
         controller.setStage(stage);
+        stage.setResizable(false);
         stage.setOnCloseRequest(windowEvent -> windowEvent.consume());
         stage.show();
 
