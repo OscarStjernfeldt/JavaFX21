@@ -9,8 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import se.iths.shapes.Shape;
-
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -18,7 +21,7 @@ public class Controller {
 
     private Stage stage;
     private Model model;
-    private ObjectProperty<Optional<Shape>> selectedShape = new SimpleObjectProperty<>(Optional.empty());
+    private final ObjectProperty<Optional<Shape>> selectedShape = new SimpleObjectProperty<>(Optional.empty());
 
     @FXML
     public Canvas canvas;
@@ -67,8 +70,7 @@ public class Controller {
         else
             model.shapes.stream()
                     .filter(shape -> shape.isInside(event.getX(), event.getY()))
-                    .findFirst().ifPresent(shape -> model.changeColor(shape, model.getColor()));
-
+                    .findFirst().ifPresent(shape -> { model.changeColor(shape, model.getColor()); model.changeSize(shape, model.getSize());});
         draw();
     }
 
@@ -95,6 +97,22 @@ public class Controller {
         fileChooser.setTitle("Save file");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Svg file", "*.svg"));
         File file = fileChooser.showSaveDialog(stage);
+        if(file == null)
+            return;
+        try {
+            Files.write(file.toPath(),textReader());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<String> textReader() {
+        List<String> shapeList = new ArrayList<>();
+        shapeList.add("<svg width=\"" + getCanvas().getWidth() + "\" height=\"" +
+                getCanvas().getHeight() + "\" xmlns=\"http://www.w3.org/2000/svg\" >");
+        model.getShapes().forEach(shape -> shapeList.add(shape.toSvg()));
+        shapeList.add("</svg>");
+        return shapeList;
     }
 
     public void exit(){

@@ -93,6 +93,10 @@ public class Model {
         this.shapeOption.set(shapeOption);
     }
 
+    public ObservableList<Shape> getShapes() {
+        return shapes;
+    }
+
     public void addShape(double x, double y, Shapes shape) {
         switch (shape) {
             case CIRCLE -> addCircle(x, y);
@@ -122,6 +126,7 @@ public class Model {
 
     public void changeSize(Shape shape, double size) {
         double previousSize = shape.getSize();
+        shape.setSize(size);
         deque.addLast(() -> shape.setSize(previousSize));
     }
 
